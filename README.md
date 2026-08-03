@@ -25,7 +25,7 @@
   <a href="https://www.python.org/"><img alt="Python" src="https://img.shields.io/badge/Python-3.11-3776AB?logo=python&logoColor=white"></a>
   <a href="#"><img alt="Built with" src="https://img.shields.io/badge/built%20with-NumPy%20%7C%20SciPy-8CAAE6?logo=scipy&logoColor=white"></a>
   <a href="#"><img alt="Task" src="https://img.shields.io/badge/task-PCG%20denoising-8A2BE2"></a>
-  <a href="#license"><img alt="License" src="https://img.shields.io/badge/License-MIT-blue.svg"></a>
+  <a href="https://www.apache.org/licenses/LICENSE-2.0"><img alt="License" src="https://img.shields.io/badge/License-Apache_2.0-blue.svg"></a>
   <a href="#"><img alt="Paper" src="https://img.shields.io/badge/Paper-under%20review-b31b1b.svg"></a>
 </p>
 
@@ -35,10 +35,9 @@
 
 <p align="center">
   If you have any questions, please contact
+  <strong>Boqiu Shen</strong> (3392937082@qq.com) or
   <strong>Menghan Hu</strong> (mhhu@ce.ecnu.edu.cn).
 </p>
-
-> 🚧 **Code release.** The full implementation will be released in this repository **upon publication**. The sections below describe the method, the data, and the intended usage so the release is easy to follow once it is online.
 
 ---
 
@@ -92,7 +91,7 @@ This repository ships **no data**. The method needs only your own `.wav` recordi
 
 ## ⚙️ Installation &amp; Usage
 
-> The commands below describe how the released code will be used. They will run once the implementation is uploaded (see the code-release note above).
+> The commands below describe how the released code will be used; they run once the full implementation is uploaded.
 
 ```bash
 # 1. Clone
@@ -178,6 +177,12 @@ If you find this work useful, please cite the paper (details will be finalized u
 
 ---
 
+## 🙏 Acknowledgements
+
+This work is sponsored by the National Natural Science Foundation of China (No. 62371189). We thank the maintainers of the public PCG and noise datasets used in this work — PhysioNet/CinC 2016, PASCAL Archive, CirCor DigiScope 2022, Yaseen2018/OAHS, ICBHI 2017, DEMAND, and ARCA23K — for making their data publicly available.
+
+---
+
 ## 📄 License
 
-Released under the **MIT License** upon code release (to be confirmed). The public datasets referenced above remain under their own licenses and are **not** redistributed here.
+This project is released under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). The public datasets referenced above remain under their own licenses and are **not** redistributed here.
