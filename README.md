@@ -1,5 +1,5 @@
 <h1 align="center">
-  Adaptive Cycle-Prior Denoising of Phonocardiograms
+  Adaptive Cycle-Prior Denoising of Heart Sound Signals
 </h1>
 
 <p align="center">
@@ -7,19 +7,29 @@
   &nbsp;·&nbsp;
   <strong>Xinxin Zhang<sup>1</sup></strong>
   &nbsp;·&nbsp;
-  <strong>Gan Pei<sup>1</sup></strong>
+  <strong>Zerui Li<sup>3</sup></strong>
+  &nbsp;·&nbsp;
+  <strong>Liudan Zhao<sup>4</sup></strong>
+  &nbsp;·&nbsp;
+  <strong>Xin Zhou<sup>5</sup></strong>
   &nbsp;·&nbsp;
   <strong>Guangtao Zhai<sup>2</sup></strong>
   &nbsp;·&nbsp;
   <strong>Menghan Hu<sup>1,*</sup></strong>
+  &nbsp;·&nbsp;
+  <strong>Kun Sun<sup>4,5,*</sup></strong>
 </p>
 
 <p align="center">
-  <strong><sup>1</sup>East China Normal University</strong> &nbsp;&nbsp;&nbsp;
-  <strong><sup>2</sup>Shanghai Jiao Tong University</strong>
+  <strong><sup>1</sup>East China Normal University</strong> &nbsp;&nbsp;
+  <strong><sup>2</sup>Shanghai Jiao Tong University</strong> &nbsp;&nbsp;
+  <strong><sup>3</sup>University of Wisconsin–Madison</strong>
+  <br>
+  <strong><sup>4</sup>Xinhua Hospital, Shanghai Jiao Tong University School of Medicine</strong> &nbsp;&nbsp;
+  <strong><sup>5</sup>Engineering Research Center of Techniques and Instruments for Diagnosis and Treatment of Congenital Heart Disease, Ministry of Education</strong>
 </p>
 
-<p align="center"><sup>*</sup>Corresponding author</p>
+<p align="center"><sup>*</sup>Corresponding authors</p>
 
 <p align="center">
   <a href="https://www.python.org/"><img alt="Python" src="https://img.shields.io/badge/Python-3.11-3776AB?logo=python&logoColor=white"></a>
@@ -139,7 +149,7 @@ Denoising performance reported in the paper (recording-level means, <code>±</co
 | Setting | ΔSNR (dB) ↑ | ΔSI-SDR (dB) ↑ | RMSE ↓ | MAE ↓ |
 |---|:---:|:---:|:---:|:---:|
 | Synthetic noise (AWGN + APGN, −6…6 dB) | **7.48 ± 0.07** | **6.26 ± 0.10** | **0.116 ± 0.002** | **0.081 ± 0.001** |
-| Real recorded noise (ICBHI / DEMAND / ARCA23K) | **6.12 ± 0.07** | **4.56 ± 0.10** | **0.129 ± 0.002** | **0.083 ± 0.001** |
+| Real recorded noise (ICBHI / DEMAND / ARCA23K) | **6.11 ± 0.07** | **4.56 ± 0.10** | **0.129 ± 0.002** | **0.083 ± 0.001** |
 
 </div>
 
@@ -167,8 +177,8 @@ If you find this work useful, please cite the paper (details will be finalized u
 
 ```bibtex
 @article{shen2026acpd,
-  title   = {Adaptive Cycle-Prior Denoising of Phonocardiograms},
-  author  = {Shen, Boqiu and Zhang, Xinxin and Pei, Gan and Zhai, Guangtao and Hu, Menghan},
+  title   = {Adaptive Cycle-Prior Denoising of Heart Sound Signals},
+  author  = {Shen, Boqiu and Zhang, Xinxin and Li, Zerui and Zhao, Liudan and Zhou, Xin and Zhai, Guangtao and Hu, Menghan and Sun, Kun},
   journal = {IEEE Journal of Biomedical and Health Informatics},
   year    = {2026},
   note    = {Under review}
