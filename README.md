@@ -36,7 +36,7 @@
   <a href="#"><img alt="Built with" src="https://img.shields.io/badge/built%20with-NumPy%20%7C%20SciPy-8CAAE6?logo=scipy&logoColor=white"></a>
   <a href="#"><img alt="Task" src="https://img.shields.io/badge/task-PCG%20denoising-8A2BE2"></a>
   <a href="https://www.apache.org/licenses/LICENSE-2.0"><img alt="License" src="https://img.shields.io/badge/License-Apache_2.0-blue.svg"></a>
-  <a href="#"><img alt="Paper" src="https://img.shields.io/badge/Paper-under%20review-b31b1b.svg"></a>
+  <a href="#"><img alt="Paper" src="https://img.shields.io/badge/Paper-research%20manuscript-b31b1b.svg"></a>
 </p>
 
 <p align="center">
@@ -99,40 +99,81 @@ This repository ships **no data**. The method needs only your own `.wav` recordi
 
 ---
 
-## ⚙️ Installation &amp; Usage
-
-> The commands below describe how the released code will be used; they run once the full implementation is uploaded.
+## ⚙️ Installation & Usage
 
 ```bash
-# 1. Clone
 git clone https://github.com/oruan233/ACPD-PCG-Denoising.git
 cd ACPD-PCG-Denoising
 
-# 2. Environment (Python 3.11; NumPy / SciPy / librosa / soundfile / PyWavelets)
+# Python 3.11 (existing environment)
+pip install -e .
+
+# Or create the supplied conda environment first
 conda env create -f environment.yml
 conda activate acpd
+pip install -e .
 ```
 
+### Choose the algorithm version
+
+The default **data-adaptive version** corresponds to the ACPD row in the JBHI
+main objective table. It uses recording-adaptive evidence gates, projected
+residual gains and candidate-energy fusion. The historical fixed-parameter
+implementation is retained with `--version fixed` or `version="fixed"`.
+See [the source trace and version notes](docs/VERSIONS.md).
+
 ```bash
-# Denoise a single file or a folder of .wav files
+# Single file or folder; adaptive is the default
 python scripts/denoise.py --input noisy.wav --output denoised.wav
 python scripts/denoise.py --input path/to/wavs --output path/to/out_dir
+
+# Historical fixed-parameter version
+python scripts/denoise.py --input noisy.wav --output fixed.wav --version fixed
+
+# Verify the release without downloading data
+python tests/test_smoke.py
+python tests/test_release.py
 ```
+
+The file/array API converts multichannel input to mono, analyzes at 2 kHz and
+returns audio at the input sample rate with the same number of frames.
 
 ```python
-# Python API
-import soundfile as sf, acpd
+import soundfile as sf
+import acpd
+
 noisy, sr = sf.read("noisy.wav")
 denoised, info = acpd.denoise_array(noisy, sr)
+sf.write("denoised.wav", denoised, sr)
+
+info = acpd.denoise_file("noisy.wav", "denoised.wav")
+fixed, fixed_info = acpd.denoise_array(noisy, sr, version="fixed")
 ```
+
+### Evaluation and cumulative ablation
 
 ```bash
-# Controlled synthetic-noise evaluation on your own reference recordings
-python scripts/evaluate.py --data-root data/reference_wavs \
-    --output-dir outputs/synthetic --noise-types awgn apgn --snr-db -6 -3 0 3 6
+# Start small on your reference recordings
+python scripts/evaluate.py --data-root data/reference_wavs --output-dir outputs/synthetic --limit 1
+
+# Real recorded-noise mixtures, using your downloaded noise clips
+python scripts/evaluate.py --data-root data/reference_wavs --noise-manifest data/noise_manifests/noise_manifest.csv --noise-categories speech cough --output-dir outputs/real
+
+# Cumulative template / reinjection / fusion / final-gate ablation
+python scripts/reproduce_results.py --experiment ablation --data-root data/reference_wavs --output-dir outputs/ablation
 ```
 
-ACPD needs only NumPy / SciPy / librosa / soundfile / PyWavelets — no deep-learning framework.
+Outputs include mixture-level metrics, recording-level means, per-dataset and
+per-scenario summaries with bootstrap intervals, run settings and error logs.
+See [data preparation](docs/DATASETS.md) and
+[reproduction instructions](docs/REPRODUCIBILITY.md) for record manifests,
+noise manifests, seeds and exact-table requirements.
+
+The complete ACPD method requires NumPy, SciPy, librosa, SoundFile and
+PyWavelets, with YAML and plotting support included in the environment.
+It needs no deep-learning framework or learned weights. External baseline
+training, MATLAB segmentation, raw datasets and physician rating records
+are outside this algorithm release.
 
 ---
 
@@ -140,16 +181,18 @@ ACPD needs only NumPy / SciPy / librosa / soundfile / PyWavelets — no deep-lea
 
 <div align="justify">
 
-Denoising performance reported in the paper (recording-level means, <code>±</code> = 95% bootstrap confidence half-widths):
+Denoising performance in the JBHI main table (recording-level means):
 
 </div>
 
 <div align="center">
 
-| Setting | ΔSNR (dB) ↑ | ΔSI-SDR (dB) ↑ | RMSE ↓ | MAE ↓ |
+| Dataset / noise | ΔSNR (dB) ↑ | ΔSI-SDR (dB) ↑ | RMSE ↓ | MAE ↓ |
 |---|:---:|:---:|:---:|:---:|
-| Synthetic noise (AWGN + APGN, −6…6 dB) | **7.48 ± 0.07** | **6.26 ± 0.10** | **0.116 ± 0.002** | **0.081 ± 0.001** |
-| Real recorded noise (ICBHI / DEMAND / ARCA23K) | **6.11 ± 0.07** | **4.56 ± 0.10** | **0.129 ± 0.002** | **0.083 ± 0.001** |
+| PhysioNet / synthetic | **7.48** | **6.25** | **0.116** | **0.082** |
+| PASCAL / synthetic | **7.79** | **6.69** | **0.108** | **0.067** |
+| PhysioNet / real recorded | **6.11** | **4.54** | **0.129** | **0.083** |
+| PASCAL / real recorded | **6.58** | **5.15** | **0.118** | **0.066** |
 
 </div>
 
@@ -165,7 +208,7 @@ Denoising performance reported in the paper (recording-level means, <code>±</co
 
 <div align="justify">
 
-Full per-method comparison against signal-processing and deep baselines, with confidence intervals and ablations, is in the paper.
+Full per-method comparison against signal-processing and deep baselines, with ablations, is in the paper. These historical results are not recomputed by installation.
 
 </div>
 
@@ -181,7 +224,7 @@ If you find this work useful, please cite the paper (details will be finalized u
   author  = {Shen, Boqiu and Zhang, Xinxin and Li, Zerui and Zhao, Liudan and Zhou, Xin and Zhai, Guangtao and Hu, Menghan and Sun, Kun},
   journal = {IEEE Journal of Biomedical and Health Informatics},
   year    = {2026},
-  note    = {Under review}
+  note    = {Research manuscript}
 }
 ```
 

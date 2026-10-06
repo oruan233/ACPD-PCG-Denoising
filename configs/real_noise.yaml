@@ -1,0 +1,20 @@
+# Real recorded-noise experiment settings (paper Table: real recorded noise).
+# External noise is independent of the heart sounds and only added to build the
+# additive mixtures. Inherits signal/method conventions from default.yaml.
+
+datasets: [physionet2016, pascal_archive]   # reference recordings for the additive mixtures
+split: eval
+min_duration_sec: 4.0
+seed: 20260515
+
+noise:
+  # Categories drawn from external noise datasets (see docs/DATASETS.md):
+  #   respiratory (ICBHI 2017), environmental (DEMAND),
+  #   speech / cough / rubbing-crumpling (ARCA23K)
+  categories: [lung_respiratory, ambient, speech, cough, crumpling]
+  input_snr_db: [-6, -3, 0, 3, 6]
+  manifest: data/noise_manifests/noise_manifest.csv   # built by the noise-manifest step
+
+metrics: [delta_snr_db, delta_si_sdr_db, rmse, mae]
+aggregation: recording_level
+uncertainty: bootstrap_95ci_halfwidth

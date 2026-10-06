@@ -1,0 +1,12 @@
+{
+  "default": "adaptive_full",
+  "verified_date": "2026-10-06",
+  "core_files": {
+    "adaptive_v4.py": "598b10f33b32cc33cf352f7a23f0c6cba25181eb9c91359e0a59bcbf95ab94e6",
+    "residual_recovery.py": "fe869217a85a6e7e55c705c5457a371d4324f6873cbfdcd547de5e71d94ee001",
+    "legacy_pcg_core.py": "d2375c75f45739074fe3cbacdd5527d47e24a708943da0f91d21a8b52c1d529c",
+    "Detect_s1_s2_new.py": "41ce09227e73f479e06234e8c9a38f6f27b24e17e10072aea1e5c496de529cbb"
+  },
+  "adaptive_source": "experiments/acpd_data_adaptive.py",
+  "adaptive_original_sha256": "7072fbbf0521d293a3ebb3178804a4d72d9c69edd84bfc711dc6f1cd444127b9"
+}

@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "acpd"
+version = "0.2.0"
+description = "Adaptive Cycle-Prior Denoising (ACPD): training-free heart-sound (PCG) denoising"
+readme = "README.md"
+requires-python = ">=3.11"
+license = {file = "LICENSE"}
+dependencies = [
+    "numpy",
+    "scipy",
+    "librosa",
+    "soundfile",
+    "PyWavelets",
+    "matplotlib",
+    "PyYAML",
+]
+
+[tool.setuptools]
+packages = ["acpd"]

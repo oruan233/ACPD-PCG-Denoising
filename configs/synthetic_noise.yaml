@@ -1,0 +1,15 @@
+# Synthetic-noise experiment settings (paper Table: synthetic noise).
+# Inherits signal/method conventions from default.yaml.
+
+datasets: [physionet2016, pascal_archive]   # reference recordings for the additive mixtures
+split: eval
+min_duration_sec: 4.0
+seed: 20260515
+
+noise:
+  types: [awgn, apgn]           # AWGN and approximately pink Gaussian noise (1/sqrt(f) scaling)
+  input_snr_db: [-6, -3, 0, 3, 6]
+
+metrics: [delta_snr_db, delta_si_sdr_db, rmse, mae]
+aggregation: recording_level    # each original recording counted once
+uncertainty: bootstrap_95ci_halfwidth

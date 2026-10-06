@@ -1,0 +1,24 @@
+# Documentation of the implementation; this file is not a runtime override.
+version: adaptive
+signal:
+  sampling_rate_hz: 2000
+  main_bandpass_hz: [25, 400]
+cycle_prior:
+  heart_rate_search_bpm: [40, 180]
+  s1s2_window_ms: 80
+  template_mode: mean
+  min_s1_anchors: 4
+residual_reinjection:
+  band_hz: [80, 350]
+  sub_bands_hz: [[80, 140], [140, 220], [220, 350]]
+  phase_bins: 256
+  evidence_quantiles: [0.1, 0.9]
+  alpha_max: 0.85
+  max_added_rms_ratio: 0.50
+fusion:
+  weight: candidate_discrepancy_power_ratio
+  gate_floor: 0.30
+evaluation:
+  min_duration_sec: 4.0
+  seed: 20260515
+  aggregation: recording_level

@@ -1,0 +1,8 @@
+min_duration_sec: 4.0
+seed: 20260515
+noise:
+  types: [awgn, apgn]
+  input_snr_db: [-6, -3, 0, 3, 6]
+# Cumulative stages, using the same intermediate candidates on each mixture.
+variants: [template_only, residual_reinjection, adaptive_fusion, full]
+aggregation: recording_level

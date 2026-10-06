@@ -1,0 +1,11 @@
+* text=auto
+*.py text eol=lf
+*.md text eol=lf
+*.yaml text eol=lf
+*.yml text eol=lf
+*.toml text eol=lf
+# Preserve frozen-source bytes (including original line endings) for provenance.
+acpd/adaptive_v4.py -text
+acpd/residual_recovery.py -text
+acpd/legacy_pcg_core.py -text
+acpd/Detect_s1_s2_new.py -text

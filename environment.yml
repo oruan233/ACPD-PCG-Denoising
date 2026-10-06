@@ -1,0 +1,17 @@
+name: acpd
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11
+  - numpy
+  - scipy
+  - librosa
+  - pysoundfile
+  - pywavelets
+  - matplotlib
+  - pyyaml
+  - pip
+# ACPD is a training-free signal-processing method; no deep-learning framework
+# is required to run the method itself. (The learning-based baselines evaluated
+# in the paper are separate and not part of this release.)

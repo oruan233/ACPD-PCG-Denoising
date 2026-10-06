@@ -1,0 +1,51 @@
+# --- Data & datasets (never redistribute; obtain from official sources) ---
+data/
+datasets/
+outputs/
+results/
+results/raw/
+
+# --- Model weights / checkpoints ---
+checkpoints/
+*.pth
+*.pt
+*.ckpt
+*.h5
+*.keras
+
+# --- Large / binary / audio / raw signal files ---
+*.mat
+*.wav
+*.flac
+*.npy
+*.npz
+*.csv.gz
+*.zip
+*.tar
+*.tar.gz
+
+# --- Python ---
+__pycache__/
+*.pyc
+*.pyo
+.ipynb_checkpoints/
+*.egg-info/
+.pytest_cache/
+build/
+dist/
+
+# --- Environments / secrets ---
+.env
+.env.*
+.tmp/
+.venv/
+venv/
+
+# --- Editor / OS ---
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Keep small curated assets and configs (do NOT ignore):
+#   assets/**, configs/**, docs/**
